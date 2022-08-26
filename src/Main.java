@@ -1,12 +1,36 @@
 import java.util.Scanner;
 
-public class GoalDifference {
+public class Main {
 
     public static void main(String[] args) {
-//        goalDiff();
-        truthInTheMiddle();
+        String[] arr = refineStringArray(new String[]{"aaa", "bb", "c"}, "to");
+arr
+
+    }
+
+    private static String[] refineStringArray(String[] stringsToRefine, String toCompare) {
+
+        if (stringsToRefine.length > 0 && toCompare != null) {
+            int count = 0;
+            for (String str : stringsToRefine) {
+                if (str!=null&& str.length() >= toCompare.length()) {
+                    count++;
+                }
+            }
 
 
+            String[] result = new String[count];
+            int index = 0;
+            for (String str : stringsToRefine) {
+                if (str!=null&& str.length() >= toCompare.length()) {
+                    result[index] = str;
+                    index++;
+                }
+            }
+
+            return result;
+        }
+        return null;
     }
 
     private static void truthInTheMiddle() {
@@ -16,7 +40,7 @@ public class GoalDifference {
         int size;
         try {
             size = scanner.nextInt();
-            if (size % 2 == 0) {
+            if (size == 1 || size % 2 == 0) {
                 System.out.println("Invalid size of matrix");
                 return;
             }
@@ -27,31 +51,29 @@ public class GoalDifference {
         }
 
 
-
         char arr[][] = new char[size][size];
 
 //        nhap ma tran
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                    arr[i][j] = scanner.next().charAt(0);
+                arr[i][j] = scanner.next().charAt(0);
             }
         }
 
 //        validate matrix
 
-        int count =0;
-        int rowOfT=0, columnOfT=0;
+        int count = 0;
+        int rowOfT = 0, columnOfT = 0;
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if(arr[i][j]=='T' )
-                {
+                if (arr[i][j] == 'T') {
                     rowOfT = i;
-                    columnOfT=j;
+                    columnOfT = j;
                     count++;
+
                 }
-                if(count>1)
-                {
+                if (count > 1) {
                     System.out.println("Invalid matrix");
                     return;
                 }
@@ -60,27 +82,13 @@ public class GoalDifference {
 
 
 //        Tinh so buoc
-        if(count==1)
-        {
+        if (count == 1) {
             int truth = (size / 2) + 1;
-            int numberOfStep = Math.abs( rowOfT+1-truth ) + Math.abs(columnOfT+1 -truth);
+            int numberOfStep = Math.abs(rowOfT + 1 - truth) + Math.abs(columnOfT + 1 - truth);
             System.out.println("Number of Step" + numberOfStep);
 
         }
 
-
-
-
-
-
-        /*
-           1 2 3 4 5
-       1 * F F F F F
-       2 * F F F F T
-       3 * F F F F F
-       4 * F F F F F
-       5 * F F F F F
-        * */
 
     }
 
