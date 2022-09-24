@@ -1,133 +1,86 @@
+import day4.Bike;
+import day4.Boat;
+import day4.Car;
+import day4.Vehicle;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
-        String[] arr = refineStringArray(new String[]{"aaa", "bb", "c"}, "to");
-arr
 
-    }
-
-    private static String[] refineStringArray(String[] stringsToRefine, String toCompare) {
-
-        if (stringsToRefine.length > 0 && toCompare != null) {
-            int count = 0;
-            for (String str : stringsToRefine) {
-                if (str!=null&& str.length() >= toCompare.length()) {
-                    count++;
-                }
-            }
+    public static void main(String args[]) {
 
 
-            String[] result = new String[count];
-            int index = 0;
-            for (String str : stringsToRefine) {
-                if (str!=null&& str.length() >= toCompare.length()) {
-                    result[index] = str;
-                    index++;
-                }
-            }
+//        tao ra danh sach cua 3 cai xe, duoc nguoi dung nhap vao
 
-            return result;
-        }
-        return null;
-    }
-
-    private static void truthInTheMiddle() {
-
+        ArrayList<Bike> listBike = new ArrayList<>();
+        int size = 3;
 
         Scanner scanner = new Scanner(System.in);
-        int size;
-        try {
-            size = scanner.nextInt();
-            if (size == 1 || size % 2 == 0) {
-                System.out.println("Invalid size of matrix");
-                return;
-            }
-
-        } catch (Exception exception) {
-            System.out.println("Invalid size of matrix");
-            return;
-        }
-
-
-        char arr[][] = new char[size][size];
-
-//        nhap ma tran
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                arr[i][j] = scanner.next().charAt(0);
-            }
-        }
-
-//        validate matrix
-
-        int count = 0;
-        int rowOfT = 0, columnOfT = 0;
 
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (arr[i][j] == 'T') {
-                    rowOfT = i;
-                    columnOfT = j;
-                    count++;
+            Bike bike = new Bike();
 
-                }
-                if (count > 1) {
-                    System.out.println("Invalid matrix");
-                    return;
-                }
-            }
+            System.out.println("input Distance: ");
+            int distance = scanner.nextInt();
+            bike.setDistance(distance);
+
+
+            System.out.println("input make: ");
+            String make = scanner.next();
+            bike.setMake(make);
+
+            listBike.add(bike);
+            System.out.println("---------");
+
         }
 
 
-//        Tinh so buoc
-        if (count == 1) {
-            int truth = (size / 2) + 1;
-            int numberOfStep = Math.abs(rowOfT + 1 - truth) + Math.abs(columnOfT + 1 - truth);
-            System.out.println("Number of Step" + numberOfStep);
-
+        for (int i = 0; i < listBike.size(); i++) {
+            Vehicle vehicle = listBike.get(i);
+            System.out.println("index: " + i + "  make:  " + vehicle.getMake() + ",number of wheels:  " + vehicle.getWheels());
         }
 
 
     }
 
-    /*
-     * this method solve goal difference
-     * */
 
-    static void goalDiff() {
-        Scanner scanner = new Scanner(System.in);
-        try {
-            int scoreTeamA = scanner.nextInt();
-            int scoreTeamB = scanner.nextInt();
+    public void a() {
+        Vehicle bike = new Bike(100, "Harley");
+        Vehicle bike2 = new Bike(120, "Harley");
+        Vehicle car = new Car(1986, "Mers");
+        Vehicle boat = new Boat(3, "Boaty");
 
-            if (scoreTeamA >= 0 && scoreTeamB >= 0) {
+        ArrayList<Vehicle> listVehicle = new ArrayList();
 
-                if (scoreTeamA == scoreTeamB) {
-                    System.out.println("This match is a tie");
-                } else {
-                    int result = scoreTeamA - scoreTeamB;
-//                    result = result > 0 ? result : -result;
-//                    Math.abs()
+//       them 1 phan tu
+        listVehicle.add(bike);
+        listVehicle.add(bike2);
+        listVehicle.add(car);
+        listVehicle.add(boat);
 
-                    System.out.println("The match is won by " + result + " goals");
-                }
+        ArrayList<Vehicle> listVehicle2 = new ArrayList();
+        Vehicle car2 = new Car(1999, "Toyota");
+        Vehicle bike3 = new Car(1000, "honda");
 
-            } else {
-                System.out.println("Bad Input");
-            }
+        listVehicle.add(car2);
+        listVehicle2.add(bike3);
 
-        } catch (Exception e) {
-            System.out.println("Bad Input");
+
+//        danh sach da co 4 chiec
+
+        System.out.println(listVehicle.size());
+
+        for (int i = 0; i < listVehicle.size(); i++) {
+            Vehicle vehicle = listVehicle.get(i);
+            System.out.println("index: " + i + "  make:  " + vehicle.getMake() + ",number of wheels:  " + vehicle.getWheels());
         }
 
+        listVehicle.addAll(listVehicle2);
+        System.out.println(listVehicle.size());
     }
 
-    static int abs(int number) {
-        if (number > 0)
-            return number;
-        return -number;
-    }
 
 }
